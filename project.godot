@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="Pinball Plunder"
+run/main_scene="res://scenes/Title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [rendering]
 

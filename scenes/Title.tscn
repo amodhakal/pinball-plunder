@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://t8kyem7v2sta"]
+
+[node name="Title" type="Node2D"]
+clip_children = 1
