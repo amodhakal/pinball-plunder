@@ -1,5 +1,8 @@
 name: "godot-ci export"
-on: push
+on:
+  push:
+    branches:
+      - mainh
 
 env:
   GODOT_VERSION: 4.3
