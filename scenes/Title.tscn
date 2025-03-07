@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://t8kyem7v2sta"]
+[gd_scene load_steps=5 format=3 uid="uid://t8kyem7v2sta"]
 
 [ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="1_xe2v2"]
+[ext_resource type="FontFile" uid="uid://ccxcgubjyyj7l" path="res://fonts/SairaStencilOne-Regular.ttf" id="2_axx4e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qwb5s"]
+font = ExtResource("2_axx4e")
+font_size = 96
+font_color = Color(0.0745098, 0.313726, 0.439216, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bybcu"]
+line_spacing = -15.0
+font = ExtResource("2_axx4e")
+font_size = 36
+font_color = Color(0.176154, 0.550194, 0.750748, 1)
 
 [node name="Title" type="Node2D"]
 clip_children = 1
@@ -9,3 +21,36 @@ clip_children = 1
 position = Vector2(577, 317.5)
 scale = Vector2(1.08519, 0.909722)
 texture = ExtResource("1_xe2v2")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 6.0
+offset_top = 18.0
+offset_right = 730.0
+offset_bottom = 170.0
+text = "Pinball Plunder"
+label_settings = SubResource("LabelSettings_qwb5s")
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="."]
+offset_left = 22.0
+offset_top = 150.0
+offset_right = 1127.0
+offset_bottom = 333.0
+text = "Your prowess in hunting treasure has reached far throughout the seas. One such person who heard of you is Alex Jones. Once hearing about your exploits, he takes his Skull & Jones to kill you and steal your loot? WHAT WILL YOU DO?"
+label_settings = SubResource("LabelSettings_bybcu")
+autowrap_mode = 2
+
+[node name="Play" type="Button" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 417.0
+offset_right = 1143.0
+offset_bottom = 512.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_axx4e")
+theme_override_font_sizes/font_size = 48
+text = "PROTECT ME BOOTY!!!"
