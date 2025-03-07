@@ -1,4 +1,11 @@
-[gd_scene format=3 uid="uid://t8kyem7v2sta"]
+[gd_scene load_steps=2 format=3 uid="uid://t8kyem7v2sta"]
+
+[ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="1_xe2v2"]
 
 [node name="Title" type="Node2D"]
 clip_children = 1
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(577, 317.5)
+scale = Vector2(1.08519, 0.909722)
+texture = ExtResource("1_xe2v2")
