@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://clo5ro7xhnnkh"]
+[gd_scene load_steps=20 format=3 uid="uid://clo5ro7xhnnkh"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hd6hx"]
 [ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="1_s0mc2"]
@@ -8,10 +8,11 @@
 [ext_resource type="Script" path="res://scripts/right_flipper.gd" id="5_ds74c"]
 [ext_resource type="Texture2D" uid="uid://dchbodow31k6x" path="res://assets/ship.png" id="6_11a6p"]
 [ext_resource type="Script" path="res://scripts/left_flipper.gd" id="8_ifxht"]
+[ext_resource type="Texture2D" uid="uid://dou8vkm6u1mno" path="res://assets/log.png" id="9_5ktfj"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_tpyx0"]
-a = Vector2(-347, 220)
-b = Vector2(23, 63)
+a = Vector2(-204, 224)
+b = Vector2(29, 101)
 
 [sub_resource type="GDScript" id="GDScript_qwqy3"]
 script/source = "extends RigidBody2D
@@ -45,29 +46,36 @@ func _physics_process(delta):
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gfh5p"]
-radius = 27.7322
+radius = 18.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_alcxu"]
-size = Vector2(230, 66.6403)
+size = Vector2(237.409, 40.0772)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_vyjhx"]
 a = Vector2(-19, 56)
 b = Vector2(356, 218)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xax1"]
-size = Vector2(61, 392)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52cix"]
+size = Vector2(2043.55, 517.199)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oql34"]
-size = Vector2(1272.5, 62)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ugiov"]
+size = Vector2(417.048, 522.853)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sr7ca"]
-size = Vector2(95.5, 353)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_apihw"]
+a = Vector2(-872.672, -1268.32)
+b = Vector2(-925.318, 2447.82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ed4dk"]
+size = Vector2(716.135, 275.098)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dy1kw"]
+size = Vector2(886.277, 279.593)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_hd6hx")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(577, 317.5)
+position = Vector2(577, 317)
 scale = Vector2(1.08519, 0.909722)
 texture = ExtResource("1_s0mc2")
 
@@ -75,8 +83,8 @@ texture = ExtResource("1_s0mc2")
 position = Vector2(6, -41)
 
 [node name="RightTriangle" type="Sprite2D" parent="RightWall"]
-position = Vector2(1123, 440)
-scale = Vector2(3.507, 0.835)
+position = Vector2(1195.22, 440)
+scale = Vector2(2.7738, 0.835)
 texture = ExtResource("3_246a4")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="RightWall"]
@@ -87,44 +95,22 @@ shape = SubResource("SegmentShape2D_tpyx0")
 script = SubResource("GDScript_qwqy3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallPhysics"]
-position = Vector2(383, 43)
+position = Vector2(397, 32)
 shape = SubResource("CircleShape2D_gfh5p")
 
 [node name="Ball" type="Sprite2D" parent="BallPhysics"]
-position = Vector2(383, 44)
-scale = Vector2(0.654748, 0.708719)
+position = Vector2(396, 32)
+scale = Vector2(0.473684, 0.433307)
 texture = ExtResource("5_4nvdx")
 
-[node name="RightFlipper" type="RigidBody2D" parent="."]
-position = Vector2(6, -41)
-gravity_scale = 0.0
-continuous_cd = 2
-angular_damp_mode = 1
-angular_damp = 5.0
-script = ExtResource("5_ds74c")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightFlipper"]
-position = Vector2(702, 595)
-rotation = -0.129154
-shape = SubResource("RectangleShape2D_alcxu")
-
-[node name="RightFlipSprite" type="Sprite2D" parent="RightFlipper"]
-position = Vector2(696.554, 578.258)
-scale = Vector2(0.660877, 0.674113)
-texture = ExtResource("2_vbjh6")
-
-[node name="RightJoint" type="PinJoint2D" parent="RightFlipper"]
-position = Vector2(772, 576)
-node_a = NodePath("../../RightWall")
-node_b = NodePath("..")
-
 [node name="Ship" type="Sprite2D" parent="."]
-position = Vector2(870, 756)
-scale = Vector2(1.23323, 0.746025)
+position = Vector2(571, 601)
+scale = Vector2(0.332968, 0.160844)
 texture = ExtResource("6_11a6p")
 
 [node name="LeftFlipper" type="RigidBody2D" parent="."]
-position = Vector2(6, -41)
+position = Vector2(360, 511)
+mass = 1000.0
 gravity_scale = 0.0
 continuous_cd = 2
 angular_damp_mode = 1
@@ -132,18 +118,48 @@ angular_damp = 5.0
 script = ExtResource("8_ifxht")
 
 [node name="LeftFlipSprite" type="Sprite2D" parent="LeftFlipper"]
-position = Vector2(450.462, 578.258)
-rotation = -3.14159
-scale = Vector2(0.660576, -0.674566)
+position = Vector2(93, 32)
+rotation = -2.8532
+scale = Vector2(0.568267, 0.603514)
 texture = ExtResource("2_vbjh6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftFlipper"]
-position = Vector2(445, 596)
-rotation = 0.12967
+position = Vector2(85, 36)
+rotation = 3.36637
+scale = Vector2(0.727046, 1.13661)
 shape = SubResource("RectangleShape2D_alcxu")
 
 [node name="LeftJoint" type="PinJoint2D" parent="LeftFlipper"]
-position = Vector2(374, 577)
+position = Vector2(34, 23)
+node_a = NodePath("../../LeftWall")
+node_b = NodePath("..")
+
+[node name="RightFlipper" type="RigidBody2D" parent="."]
+position = Vector2(635, 482)
+scale = Vector2(0.901622, 1.10126)
+mass = 1000.0
+gravity_scale = 0.0
+continuous_cd = 2
+angular_damp_mode = 1
+angular_damp = 5.0
+script = ExtResource("5_ds74c")
+
+[node name="RightFlipSprite" type="Sprite2D" parent="RightFlipper"]
+position = Vector2(94, 36)
+rotation = -3.36343
+scale = Vector2(-0.604927, -0.530951)
+texture = ExtResource("2_vbjh6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightFlipper"]
+position = Vector2(84.2972, 39.0736)
+rotation = -3.4406
+scale = Vector2(0.727046, 0.75775)
+shape = SubResource("RectangleShape2D_alcxu")
+
+[node name="RightJoint" type="PinJoint2D" parent="RightFlipper"]
+position = Vector2(162, 23)
+rotation = 3.06243
+scale = Vector2(3.57823, -1.3984)
 node_a = NodePath("../../LeftWall")
 node_b = NodePath("..")
 
@@ -160,22 +176,118 @@ texture = ExtResource("3_246a4")
 position = Vector2(10, 332)
 shape = SubResource("SegmentShape2D_vyjhx")
 
-[node name="GameWall" type="Node" parent="."]
+[node name="EnemyShip" type="Sprite2D" parent="."]
+position = Vector2(562, 52)
+scale = Vector2(-0.320448, 0.176649)
+texture = ExtResource("6_11a6p")
 
-[node name="StaticLeft" type="StaticBody2D" parent="GameWall"]
+[node name="RightShips" type="StaticBody2D" parent="."]
+position = Vector2(1112, 202)
+rotation = 1.58606
+scale = Vector2(0.223434, 0.225851)
 
-[node name="Left" type="CollisionShape2D" parent="GameWall/StaticLeft"]
-position = Vector2(-32, 190)
-shape = SubResource("RectangleShape2D_1xax1")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightShips"]
+position = Vector2(0.726807, 9.2583)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_52cix")
 
-[node name="StaticTop" type="StaticBody2D" parent="GameWall"]
+[node name="Ship2" type="Sprite2D" parent="RightShips"]
+position = Vector2(394.249, -16.5444)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
 
-[node name="Top" type="CollisionShape2D" parent="GameWall/StaticTop"]
-position = Vector2(594, -29)
-shape = SubResource("RectangleShape2D_oql34")
+[node name="Ship3" type="Sprite2D" parent="RightShips"]
+position = Vector2(6.10352e-05, -0.000610352)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
 
-[node name="StaticRight" type="StaticBody2D" parent="GameWall"]
+[node name="Ship4" type="Sprite2D" parent="RightShips"]
+position = Vector2(-407.232, 6.15052)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
 
-[node name="Right" type="CollisionShape2D" parent="GameWall/StaticRight"]
-position = Vector2(1202.25, 167)
-shape = SubResource("RectangleShape2D_sr7ca")
+[node name="Ship5" type="Sprite2D" parent="RightShips"]
+position = Vector2(-796.768, -1.25031)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship6" type="Sprite2D" parent="RightShips"]
+position = Vector2(-796.768, -1.25031)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
+
+[node name="LeftShips" type="StaticBody2D" parent="."]
+position = Vector2(42, 221)
+rotation = 1.58606
+scale = Vector2(0.223434, -0.260198)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftShips"]
+position = Vector2(0.726807, 9.2583)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_52cix")
+
+[node name="Ship2" type="Sprite2D" parent="LeftShips"]
+position = Vector2(394.249, -16.5444)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship3" type="Sprite2D" parent="LeftShips"]
+position = Vector2(6.10352e-05, -0.000610352)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship4" type="Sprite2D" parent="LeftShips"]
+position = Vector2(-407.232, -5.3391)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship5" type="Sprite2D" parent="LeftShips"]
+position = Vector2(-796.768, -1.25031)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship6" type="Sprite2D" parent="LeftShips"]
+position = Vector2(-796.768, -1.25031)
+scale = Vector2(1, 1)
+texture = ExtResource("6_11a6p")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(42, 221)
+rotation = 1.58606
+scale = Vector2(0.223434, -0.260198)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(-813.925, 1957.53)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ugiov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(-147.474, 1497.1)
+shape = SubResource("SegmentShape2D_apihw")
+
+[node name="LogSprite2" type="Sprite2D" parent="."]
+position = Vector2(879.004, 432.087)
+rotation = -0.622178
+scale = Vector2(0.229846, 0.207973)
+skew = -0.0230949
+texture = ExtResource("9_5ktfj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LogSprite2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LogSprite2/StaticBody2D"]
+position = Vector2(36.8057, -5.77287)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ed4dk")
+
+[node name="LogSprite" type="Sprite2D" parent="."]
+position = Vector2(967, 202)
+rotation = 1.59868
+scale = Vector2(0.355874, 0.178935)
+texture = ExtResource("9_5ktfj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LogSprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LogSprite/StaticBody2D"]
+position = Vector2(-4.63831, 2.4502)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_dy1kw")
