@@ -1,11 +1,15 @@
-extends Node2D
+extends Node
 
+@onready var left_flipper = $LeftFlipper
+@onready var right_flipper = $RightFlipper
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _input(event):
+	if event.is_action_pressed("flip_left"):
+		left_flipper.flip()
+	elif event.is_action_released("flip_left"):
+		left_flipper.release()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	if event.is_action_pressed("flip_right"):
+		right_flipper.flip()
+	elif event.is_action_released("flip_right"):
+		right_flipper.release()
