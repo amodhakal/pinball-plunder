@@ -17,7 +17,7 @@ func _physics_process(delta):
 	# Check if the flipper has reached the resting position
 	if !flipping and abs(rotation - resting_rotation) < 0.1:  # Rotation is close to resting position
 		angular_velocity = 0  # Stop applying angular velocity once resting position is reached
-	elif flipping and abs(rotation - resting_rotation) > 1.0:
+	elif flipping and rotation - resting_rotation > 1.0:
 		angular_velocity = 0
 	else:
 		if flipping:
