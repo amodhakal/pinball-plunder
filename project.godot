@@ -14,6 +14,10 @@ config/name="Pinball Plunder"
 run/main_scene="res://scenes/Title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 
+[autoload]
+
+PointManager="*res://scripts/PointManager.gd"
+
 [display]
 
 window/stretch/mode="viewport"
