@@ -95,9 +95,11 @@ disable_mode = 2
 mass = 0.5
 can_sleep = false
 linear_damp_mode = 1
-linear_damp = 0.5
+linear_damp = 2.0
+angular_damp_mode = 1
+angular_damp = 0.5
 script = SubResource("GDScript_qwqy3")
-speed = 20.0
+speed = 10.0
 metadata/name = "ball"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallPhysics"]
@@ -111,7 +113,12 @@ texture = ExtResource("5_4nvdx")
 
 [node name="HardBallPhysics" type="RigidBody2D" parent="."]
 position = Vector2(338, 64)
+linear_damp_mode = 1
+linear_damp = 2.0
+angular_damp_mode = 1
+angular_damp = 0.5
 script = ExtResource("4_7v3x8")
+speed = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HardBallPhysics"]
 position = Vector2(397, 32)
