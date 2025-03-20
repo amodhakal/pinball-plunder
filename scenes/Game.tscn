@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://clo5ro7xhnnkh"]
+[gd_scene load_steps=26 format=3 uid="uid://d0cc1r2q15clm"]
 
 [ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="1_s0mc2"]
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_shevl"]
@@ -9,9 +9,10 @@
 [ext_resource type="Script" path="res://scripts/left_flipper.gd" id="8_ifxht"]
 [ext_resource type="Texture2D" uid="uid://dou8vkm6u1mno" path="res://assets/log.png" id="9_5ktfj"]
 [ext_resource type="Texture2D" uid="uid://dxqxgxemh0xqh" path="res://assets/truecannon.png" id="9_y32yo"]
-[ext_resource type="PackedScene" uid="uid://v4rfn8tctwr6" path="res://components/treasure.tscn" id="10_b7dcs"]
-[ext_resource type="PackedScene" uid="uid://s405trtatv01" path="res://components/pirate.tscn" id="11_rfaa5"]
+[ext_resource type="PackedScene" path="res://components/treasure.tscn" id="10_b7dcs"]
+[ext_resource type="PackedScene" path="res://components/pirate.tscn" id="11_rfaa5"]
 [ext_resource type="FontFile" uid="uid://ccxcgubjyyj7l" path="res://fonts/SairaStencilOne-Regular.ttf" id="12_b8suw"]
+[ext_resource type="Texture2D" uid="uid://c5fodbuers1ng" path="res://assets/explosion.png" id="13_2nya2"]
 
 [sub_resource type="GDScript" id="GDScript_qwqy3"]
 script/source = "extends RigidBody2D
@@ -385,6 +386,11 @@ horizontal_alignment = 1
 wait_time = 4.0
 one_shot = true
 autostart = true
+
+[node name="Explosion" type="Sprite2D" parent="."]
+position = Vector2(592, 610)
+scale = Vector2(0.137546, 0.137546)
+texture = ExtResource("13_2nya2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

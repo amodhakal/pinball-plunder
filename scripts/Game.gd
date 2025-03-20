@@ -9,6 +9,7 @@ extends Node
 @onready var PointsLabel = $Points2
 @onready var timer = $Timer
 @onready var ship = $Area2D/Ship
+@onready var explosion = $Explosion
 
 var explosionTexture = preload("res://assets/explosion.png")
 var defeatLvl = "res://scenes/Defeat.tscn"
@@ -17,7 +18,6 @@ func _process(delta: float) -> void:
 	if Globals.gamemode == "normal":
 		hardBall.visible = false
 		hardCannon.visible = false
-		
 	PointsLabel.text = "Score: " + str(PointManager.getPoints())
 
 func _input(event):
@@ -34,12 +34,19 @@ func _input(event):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if Globals.gamemode == "normal" && body == ball:
-		ship.texture = explosionTexture
+		explosion.visible = true
+		await get_tree().create_timer(2.0).timeout 
 		get_tree().change_scene_to_file(defeatLvl)
 		return
+	else:
+		explosion.visible = false
 	
 	if body == ball or body == hardBall && Globals.gamemode == "hard":
+		explosion.visible = true
+		await get_tree().create_timer(2.0).timeout 
 		get_tree().change_scene_to_file(defeatLvl)
+	else:
+		explosion.visible = false
 	
 
 
