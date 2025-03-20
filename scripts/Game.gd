@@ -12,6 +12,7 @@ var defeatLvl = "res://scenes/Defeat.tscn"
 
 func _process(delta: float) -> void:
 	if Globals.gamemode == "normal":
+		hardBall.visible = false
 		hardCannon.visible = false
 		
 	PointsLabel.text = "Score: " + str(PointManager.getPoints())
@@ -33,7 +34,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		get_tree().change_scene_to_file(defeatLvl)
 		return
 	
-	if body == ball or body == hardBall:
+	if body == ball or body == hardBall && Globals.gamemode == "hard":
 		get_tree().change_scene_to_file(defeatLvl)
 	
 
