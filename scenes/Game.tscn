@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://clo5ro7xhnnkh"]
+[gd_scene load_steps=23 format=3 uid="uid://clo5ro7xhnnkh"]
 
 [ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="1_s0mc2"]
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_shevl"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bs67gss42v31x" path="res://assets/ball.png" id="5_4nvdx"]
 [ext_resource type="Script" path="res://scripts/right_flipper.gd" id="5_ds74c"]
 [ext_resource type="Texture2D" uid="uid://dchbodow31k6x" path="res://assets/ship.png" id="6_11a6p"]
+[ext_resource type="Texture2D" uid="uid://dg2dg4a88kmga" path="res://assets/cannon.png" id="8_3cfb1"]
 [ext_resource type="Script" path="res://scripts/left_flipper.gd" id="8_ifxht"]
 [ext_resource type="Texture2D" uid="uid://dou8vkm6u1mno" path="res://assets/log.png" id="9_5ktfj"]
 
@@ -41,36 +42,46 @@ func _physics_process(delta):
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gfh5p"]
-radius = 18.0
+radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_alcxu"]
-size = Vector2(254.045, 25.962)
+size = Vector2(270.091, 25.962)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_52cix"]
-size = Vector2(2043.55, 517.199)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4w4xu"]
+a = Vector2(-738.49, 294.558)
+b = Vector2(742.691, 267.761)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_apihw"]
-a = Vector2(-872.672, -1268.32)
-b = Vector2(-925.318, 2447.82)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kqbgs"]
+a = Vector2(569.804, 176.591)
+b = Vector2(-1005.9, 182.842)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_m7vtm"]
-a = Vector2(-10, 308)
-b = Vector2(155, 420)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7re64"]
+size = Vector2(209.12, 54.8504)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hmtb6"]
-a = Vector2(-1, -14)
-b = Vector2(-9, 309)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_huq7n"]
-a = Vector2(779, 229)
-b = Vector2(612, 347)
+a = Vector2(25.8662, -6.5527)
+b = Vector2(-280.15, -4.03076)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hihjl"]
-a = Vector2(945, 355)
-b = Vector2(951, 40)
+a = Vector2(-137.994, 2.38458)
+b = Vector2(166.043, -1.27527)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0tto"]
-size = Vector2(1184.5, 82)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6r8y0"]
+a = Vector2(20, 6)
+b = Vector2(40, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6nhc"]
+size = Vector2(201.034, 20.9716)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5nbi7"]
+a = Vector2(915, 68)
+b = Vector2(890, 76)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hwdo5"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0bb64"]
+normal = Vector2(0, 1)
+distance = -77.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_shevl")
@@ -81,15 +92,22 @@ scale = Vector2(1.08519, 0.909722)
 texture = ExtResource("1_s0mc2")
 
 [node name="BallPhysics" type="RigidBody2D" parent="."]
+position = Vector2(-75, 5)
+disable_mode = 2
+mass = 0.5
+can_sleep = false
+linear_damp_mode = 1
+linear_damp = 0.5
 script = SubResource("GDScript_qwqy3")
+speed = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallPhysics"]
-position = Vector2(397, 32)
+position = Vector2(629.5, 43.8607)
 shape = SubResource("CircleShape2D_gfh5p")
 
 [node name="Ball" type="Sprite2D" parent="BallPhysics"]
-position = Vector2(396, 32)
-scale = Vector2(0.473684, 0.433307)
+position = Vector2(629.5, 43.8607)
+scale = Vector2(0.197369, 0.180545)
 texture = ExtResource("5_4nvdx")
 
 [node name="LeftFlipper" type="RigidBody2D" parent="."]
@@ -108,7 +126,7 @@ scale = Vector2(0.605, 0.531)
 texture = ExtResource("2_vbjh6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftFlipper"]
-position = Vector2(107.288, 16.4662)
+position = Vector2(111.819, 17.7906)
 rotation = -2.85722
 scale = Vector2(0.727046, 1.13661)
 shape = SubResource("RectangleShape2D_alcxu")
@@ -141,7 +159,7 @@ scale = Vector2(-0.604927, -0.530951)
 texture = ExtResource("2_vbjh6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightFlipper"]
-position = Vector2(698, 514)
+position = Vector2(695.949, 514.363)
 rotation = 2.80878
 scale = Vector2(0.727046, 0.75775)
 shape = SubResource("RectangleShape2D_alcxu")
@@ -150,10 +168,6 @@ shape = SubResource("RectangleShape2D_alcxu")
 position = Vector2(1112, 202)
 rotation = 1.58606
 scale = Vector2(0.223434, 0.225851)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightShips"]
-position = Vector2(0.726807, 9.2583)
-shape = SubResource("RectangleShape2D_52cix")
 
 [node name="Ship2" type="Sprite2D" parent="RightShips"]
 position = Vector2(394.249, -16.5444)
@@ -175,14 +189,15 @@ texture = ExtResource("6_11a6p")
 position = Vector2(-796.768, -1.25031)
 texture = ExtResource("6_11a6p")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightShips"]
+position = Vector2(-162.742, -103.82)
+shape = SubResource("SegmentShape2D_4w4xu")
+one_way_collision_margin = 128.0
+
 [node name="LeftShips" type="StaticBody2D" parent="."]
 position = Vector2(42, 221)
 rotation = 1.58606
 scale = Vector2(0.223434, -0.260198)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftShips"]
-position = Vector2(0.726807, 9.2583)
-shape = SubResource("RectangleShape2D_52cix")
 
 [node name="Ship2" type="Sprite2D" parent="LeftShips"]
 position = Vector2(394.249, -16.5444)
@@ -204,14 +219,16 @@ texture = ExtResource("6_11a6p")
 position = Vector2(-796.768, -1.25031)
 texture = ExtResource("6_11a6p")
 
-[node name="TopWall" type="StaticBody2D" parent="."]
-position = Vector2(42, 221)
-rotation = 1.58606
-scale = Vector2(0.223434, -0.260198)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftShips"]
+position = Vector2(17.6954, 11.7629)
+shape = SubResource("SegmentShape2D_kqbgs")
+one_way_collision_margin = 128.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
-position = Vector2(-147.474, 1497.1)
-shape = SubResource("SegmentShape2D_apihw")
+[node name="Cannon" type="Sprite2D" parent="."]
+position = Vector2(569, 37)
+rotation = 0.0152637
+scale = Vector2(0.53525, -0.210176)
+texture = ExtResource("8_3cfb1")
 
 [node name="Logs" type="StaticBody2D" parent="."]
 
@@ -242,29 +259,52 @@ scale = Vector2(0.355874, 0.178935)
 texture = ExtResource("9_5ktfj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Logs"]
-position = Vector2(228, 66)
-shape = SubResource("SegmentShape2D_m7vtm")
+position = Vector2(286.158, 447.283)
+rotation = 0.621996
+shape = SubResource("RectangleShape2D_7re64")
+one_way_collision_margin = 128.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Logs"]
-position = Vector2(227, 65)
+position = Vector2(233, 87)
+rotation = -1.54948
 shape = SubResource("SegmentShape2D_hmtb6")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Logs"]
-position = Vector2(168, 125)
-shape = SubResource("SegmentShape2D_huq7n")
-
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Logs"]
+position = Vector2(948, 189)
+rotation = 1.60257
 shape = SubResource("SegmentShape2D_hihjl")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Logs"]
+position = Vector2(187, 50)
+shape = SubResource("SegmentShape2D_6r8y0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Logs"]
+position = Vector2(866.714, 420.796)
+rotation = -0.621337
+shape = SubResource("RectangleShape2D_g6nhc")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Logs"]
+position = Vector2(26, -167)
+shape = SubResource("SegmentShape2D_5nbi7")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(579.25, 616)
-shape = SubResource("RectangleShape2D_x0tto")
+position = Vector2(585, 576)
+shape = SubResource("WorldBoundaryShape2D_hwdo5")
+one_way_collision_margin = 128.0
 
 [node name="Ship" type="Sprite2D" parent="Area2D"]
 position = Vector2(576, 612)
 scale = Vector2(0.128402, 0.116188)
 texture = ExtResource("6_11a6p")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(571, 84)
+shape = SubResource("WorldBoundaryShape2D_0bb64")
+one_way_collision = true
+one_way_collision_margin = 128.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
