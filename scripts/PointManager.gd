@@ -15,4 +15,3 @@ func removePiratePoints():
 
 func resetPoints():
 	points = 0
-	

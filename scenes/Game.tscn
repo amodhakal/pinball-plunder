@@ -3,15 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="1_s0mc2"]
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_shevl"]
 [ext_resource type="Texture2D" uid="uid://dvciojc1o2mq2" path="res://assets/flipper.png" id="2_vbjh6"]
+[ext_resource type="Script" path="res://scenes/hard_ball_physics.gd" id="4_7v3x8"]
 [ext_resource type="Texture2D" uid="uid://bs67gss42v31x" path="res://assets/ball.png" id="5_4nvdx"]
 [ext_resource type="Script" path="res://scripts/right_flipper.gd" id="5_ds74c"]
 [ext_resource type="Texture2D" uid="uid://dchbodow31k6x" path="res://assets/ship.png" id="6_11a6p"]
 [ext_resource type="Texture2D" uid="uid://dg2dg4a88kmga" path="res://assets/cannon.png" id="8_3cfb1"]
 [ext_resource type="Script" path="res://scripts/left_flipper.gd" id="8_ifxht"]
 [ext_resource type="Texture2D" uid="uid://dou8vkm6u1mno" path="res://assets/log.png" id="9_5ktfj"]
+[ext_resource type="Texture2D" uid="uid://dxqxgxemh0xqh" path="res://assets/truecannon.png" id="9_y32yo"]
+[ext_resource type="Script" path="res://scenes/hard_cannon.gd" id="10_jvp2g"]
 [ext_resource type="PackedScene" uid="uid://v4rfn8tctwr6" path="res://components/treasure.tscn" id="10_b7dcs"]
 [ext_resource type="PackedScene" uid="uid://s405trtatv01" path="res://components/pirate.tscn" id="11_rfaa5"]
 [ext_resource type="FontFile" uid="uid://ccxcgubjyyj7l" path="res://fonts/SairaStencilOne-Regular.ttf" id="12_b8suw"]
+
 
 [sub_resource type="GDScript" id="GDScript_qwqy3"]
 script/source = "extends RigidBody2D
@@ -20,10 +24,6 @@ script/source = "extends RigidBody2D
 @export var speed: float = 500  # Adjust the speed of the ball
 
 var velocity = Vector2.ZERO
-
-func _ready():
-	# Set initial velocity
-	velocity = Vector2(100, 300)  # Customize starting speed
 
 func _physics_process(delta):
 	# Move the ball
@@ -42,7 +42,6 @@ func _physics_process(delta):
 		velocity.y = abs(velocity.y)  # Reverse Y direction (bounce down)
 	elif position.y > screen_rect.position.y + screen_rect.size.y:  # Ball goes beyond the bottom
 		velocity.y = -abs(velocity.y)  # Reverse Y direction (bounce up)
-"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gfh5p"]
 radius = 7.0
@@ -56,6 +55,13 @@ size = Vector2(209.12, 54.8504)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hmtb6"]
 a = Vector2(25.8662, -6.5527)
 b = Vector2(-280.15, -4.03076)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_csjai"]
+size = Vector2(1182, 7)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m7vtm"]
+a = Vector2(-10, 308)
+b = Vector2(155, 420)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hihjl"]
 a = Vector2(-137.994, 2.38458)
@@ -93,7 +99,7 @@ scale = Vector2(1.08519, 0.909722)
 texture = ExtResource("1_s0mc2")
 
 [node name="BallPhysics" type="RigidBody2D" parent="."]
-position = Vector2(-75, 5)
+position = Vector2(-6, 64)
 disable_mode = 2
 mass = 0.5
 can_sleep = false
@@ -110,6 +116,19 @@ shape = SubResource("CircleShape2D_gfh5p")
 [node name="Ball" type="Sprite2D" parent="BallPhysics"]
 position = Vector2(629.5, 43.8607)
 scale = Vector2(0.197369, 0.180545)
+texture = ExtResource("5_4nvdx")
+
+[node name="HardBallPhysics" type="RigidBody2D" parent="."]
+position = Vector2(338, 64)
+script = ExtResource("4_7v3x8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HardBallPhysics"]
+position = Vector2(397, 32)
+shape = SubResource("CircleShape2D_gfh5p")
+
+[node name="Ball" type="Sprite2D" parent="HardBallPhysics"]
+position = Vector2(396, 32)
+scale = Vector2(0.473684, 0.433307)
 texture = ExtResource("5_4nvdx")
 
 [node name="LeftFlipper" type="RigidBody2D" parent="."]
@@ -176,6 +195,13 @@ texture = ExtResource("8_3cfb1")
 process_callback = 0
 one_shot = true
 autostart = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(-1054.9, 2057.91)
+rotation = 1.58857
+scale = Vector2(3.84339, -4.47546)
+skew = -0.0046674
+shape = SubResource("RectangleShape2D_csjai")
 
 [node name="Logs" type="StaticBody2D" parent="."]
 
@@ -245,6 +271,19 @@ one_way_collision_margin = 128.0
 position = Vector2(576, 612)
 scale = Vector2(0.128402, 0.116188)
 texture = ExtResource("6_11a6p")
+
+[node name="DefaultCannon" type="Sprite2D" parent="."]
+position = Vector2(388, 13)
+rotation = -0.0166885
+scale = Vector2(0.313257, 0.274025)
+texture = ExtResource("9_y32yo")
+
+[node name="HardCannon" type="Sprite2D" parent="."]
+position = Vector2(732, 7)
+rotation = 6.27443
+scale = Vector2(-0.311931, 0.265153)
+texture = ExtResource("9_y32yo")
+script = ExtResource("10_jvp2g")
 
 [node name="Ship2" type="Sprite2D" parent="Area2D"]
 position = Vector2(576, 612)

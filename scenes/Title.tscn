@@ -57,6 +57,16 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_axx4e")
 theme_override_font_sizes/font_size = 48
-text = "PROTECT ME BOOTY!!!"
+text = "PROTECT ME BOOTY! (NORMAL)"
+
+[node name="HardMode" type="Button" parent="."]
+offset_left = 43.0
+offset_top = 521.0
+offset_right = 1090.0
+offset_bottom = 605.0
+theme_override_fonts/font = ExtResource("2_axx4e")
+theme_override_font_sizes/font_size = 48
+text = "TAKE THE PLUNGE! (HARD)"
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="HardMode" to="." method="_on_hard_pressed"]
