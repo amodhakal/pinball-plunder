@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 [autoload]
 
 PointManager="*res://scripts/PointManager.gd"
+Globals="*res://scripts/Globals.gd"
 
 [display]
 

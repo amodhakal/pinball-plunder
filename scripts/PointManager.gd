@@ -9,4 +9,5 @@ func addCollisionPoints():
 	points += 10
 
 func handleDefeat():
-	points -= 100
+	#points -= 100  it does not make sense to lose points for losing
+	return

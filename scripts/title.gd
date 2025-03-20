@@ -14,5 +14,9 @@ func _process(delta: float) -> void:
 
 # Go to the Game
 func _on_play_pressed() -> void:
+	Globals.gamemode = "normal"
 	get_tree().change_scene_to_file(gameLvl)
-	pass 
+
+func _on_hard_pressed() -> void:
+	Globals.gamemode = "hard"
+	get_tree().change_scene_to_file(gameLvl)

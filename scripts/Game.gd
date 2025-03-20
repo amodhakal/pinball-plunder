@@ -5,6 +5,8 @@ extends Node
 @onready var right_flipper = $RightFlipper
 var defeatLvl = "res://scenes/Defeat.tscn"
 
+
+		
 func _input(event):
 	if event.is_action_pressed("flip_left"):
 		left_flipper.flip()
