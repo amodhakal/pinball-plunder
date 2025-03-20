@@ -1,13 +1,19 @@
 extends Node
 
 @onready var ball = $BallPhysics
+@onready var hardBall = $HardBallPhysics
 @onready var left_flipper = $LeftFlipper
 @onready var right_flipper = $RightFlipper
-@onready var cannon = $Cannon
+@onready var cannon = $DefaultCannon
+@onready var hardCannon = $HardCannon
 @onready var PointsLabel = $Points2
+@onready var timer = $Timer
 var defeatLvl = "res://scenes/Defeat.tscn"
 
 func _process(delta: float) -> void:
+	if Globals.gamemode == "normal":
+		hardCannon.visible = false
+		
 	PointsLabel.text = "Score: " + str(PointManager.getPoints())
 
 func _input(event):
@@ -23,11 +29,16 @@ func _input(event):
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if ( body == ball):
+	if Globals.gamemode == "normal" && body == ball:
+		get_tree().change_scene_to_file(defeatLvl)
+		return
+	
+	if body == ball or body == hardBall:
 		get_tree().change_scene_to_file(defeatLvl)
 	
 
 
 func _on_timer_timeout() -> void:
 	cannon.visible = false
-	pass # Replace with function body.
+	if hardCannon.visible:
+		hardCannon.visible = false
