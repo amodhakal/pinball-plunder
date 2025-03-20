@@ -1,0 +1,608 @@
+[gd_scene load_steps=23 format=3 uid="uid://clo5ro7xhnnkh"]
+
+[ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="1_s0mc2"]
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_shevl"]
+[ext_resource type="Texture2D" uid="uid://dvciojc1o2mq2" path="res://assets/flipper.png" id="2_vbjh6"]
+[ext_resource type="Texture2D" uid="uid://bs67gss42v31x" path="res://assets/ball.png" id="5_4nvdx"]
+[ext_resource type="Script" path="res://scripts/right_flipper.gd" id="5_ds74c"]
+[ext_resource type="Texture2D" uid="uid://dchbodow31k6x" path="res://assets/ship.png" id="6_11a6p"]
+[ext_resource type="Texture2D" uid="uid://dg2dg4a88kmga" path="res://assets/cannon.png" id="8_3cfb1"]
+[ext_resource type="Script" path="res://scripts/left_flipper.gd" id="8_ifxht"]
+[ext_resource type="Texture2D" uid="uid://dou8vkm6u1mno" path="res://assets/log.png" id="9_5ktfj"]
+[ext_resource type="PackedScene" uid="uid://v4rfn8tctwr6" path="res://components/treasure.tscn" id="10_b7dcs"]
+[ext_resource type="PackedScene" uid="uid://s405trtatv01" path="res://components/pirate.tscn" id="11_rfaa5"]
+
+[sub_resource type="GDScript" id="GDScript_qwqy3"]
+script/source = "extends RigidBody2D
+
+@export var bounce_factor: float = 1.0  # Controls the strength of bounce
+@export var speed: float = 500  # Adjust the speed of the ball
+
+var velocity = Vector2.ZERO
+
+func _ready():
+	# Set initial velocity
+	velocity = Vector2(100, 300)  # Customize starting speed
+
+func _physics_process(delta):
+	# Move the ball
+	velocity = velocity.normalized() * speed  # Normalize to control consistent speed
+	position += velocity * delta  # Apply the velocity to the ball's position
+	
+	# Check if the ball is outside the screen boundaries
+	var screen_rect = get_viewport().get_visible_rect()
+
+	if position.x < screen_rect.position.x:  # Ball goes beyond the left
+		velocity.x = abs(velocity.x)  # Reverse X direction (bounce right)
+	elif position.x > screen_rect.position.x + screen_rect.size.x:  # Ball goes beyond the right
+		velocity.x = -abs(velocity.x)  # Reverse X direction (bounce left)
+
+	if position.y < screen_rect.position.y:  # Ball goes beyond the top
+		velocity.y = abs(velocity.y)  # Reverse Y direction (bounce down)
+	elif position.y > screen_rect.position.y + screen_rect.size.y:  # Ball goes beyond the bottom
+		velocity.y = -abs(velocity.y)  # Reverse Y direction (bounce up)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gfh5p"]
+radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_alcxu"]
+size = Vector2(270.091, 51.4002)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7re64"]
+size = Vector2(209.12, 54.8504)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hmtb6"]
+a = Vector2(25.8662, -6.5527)
+b = Vector2(-280.15, -4.03076)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hihjl"]
+a = Vector2(-137.994, 2.38458)
+b = Vector2(166.043, -1.27527)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6r8y0"]
+a = Vector2(20, 6)
+b = Vector2(40, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6nhc"]
+size = Vector2(201.034, 20.9716)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5nbi7"]
+a = Vector2(915, 68)
+b = Vector2(890, 76)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hwdo5"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0bb64"]
+normal = Vector2(0, 1)
+distance = -77.0
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_shevl")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(549, 311)
+scale = Vector2(1.08519, 0.909722)
+texture = ExtResource("1_s0mc2")
+
+[node name="BallPhysics" type="RigidBody2D" parent="."]
+position = Vector2(-75, 5)
+disable_mode = 2
+mass = 0.5
+can_sleep = false
+linear_damp_mode = 1
+linear_damp = 0.5
+script = SubResource("GDScript_qwqy3")
+speed = 20.0
+metadata/name = "ball"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallPhysics"]
+position = Vector2(629.5, 43.8607)
+shape = SubResource("CircleShape2D_gfh5p")
+
+[node name="Ball" type="Sprite2D" parent="BallPhysics"]
+position = Vector2(629.5, 43.8607)
+scale = Vector2(0.197369, 0.180545)
+texture = ExtResource("5_4nvdx")
+
+[node name="LeftFlipper" type="RigidBody2D" parent="."]
+position = Vector2(360, 511)
+mass = 1000.0
+gravity_scale = 0.0
+continuous_cd = 2
+angular_damp_mode = 1
+angular_damp = 5.0
+script = ExtResource("8_ifxht")
+
+[node name="LeftFlipSprite" type="Sprite2D" parent="LeftFlipper"]
+position = Vector2(107, 24)
+rotation = -2.8517
+scale = Vector2(0.605, 0.531)
+texture = ExtResource("2_vbjh6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftFlipper"]
+position = Vector2(107, 32)
+rotation = -2.85722
+scale = Vector2(0.727046, 1.13661)
+shape = SubResource("RectangleShape2D_alcxu")
+
+[node name="LeftJoint" type="PinJoint2D" parent="LeftFlipper"]
+position = Vector2(39, 4)
+scale = Vector2(0.12, 0.436835)
+node_a = NodePath("../../Logs")
+node_b = NodePath("..")
+
+[node name="RightFlipper" type="RigidBody2D" parent="."]
+mass = 1000.0
+gravity_scale = 0.0
+continuous_cd = 2
+angular_damp_mode = 1
+angular_damp = 5.0
+script = ExtResource("5_ds74c")
+
+[node name="RightJoint" type="PinJoint2D" parent="RightFlipper"]
+position = Vector2(768, 506)
+rotation = 3.06243
+scale = Vector2(1.41875, 0.0174409)
+node_a = NodePath("../../Logs")
+node_b = NodePath("..")
+
+[node name="RightFlipSprite" type="Sprite2D" parent="RightFlipper"]
+position = Vector2(700, 518)
+rotation = -3.3615
+scale = Vector2(-0.604927, -0.530951)
+texture = ExtResource("2_vbjh6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightFlipper"]
+position = Vector2(699.098, 523.472)
+rotation = 2.80878
+scale = Vector2(0.727046, 0.75775)
+shape = SubResource("RectangleShape2D_alcxu")
+
+[node name="Cannon" type="Sprite2D" parent="."]
+position = Vector2(569, 37)
+rotation = 0.0152637
+scale = Vector2(0.53525, -0.210176)
+texture = ExtResource("8_3cfb1")
+
+[node name="Timer" type="Timer" parent="Cannon"]
+process_callback = 0
+one_shot = true
+autostart = true
+
+[node name="Logs" type="StaticBody2D" parent="."]
+
+[node name="LogSprite2" type="Sprite2D" parent="Logs"]
+position = Vector2(879.004, 432.087)
+rotation = -0.622178
+scale = Vector2(0.229846, 0.207973)
+skew = -0.023095
+texture = ExtResource("9_5ktfj")
+
+[node name="LogSprite" type="Sprite2D" parent="Logs"]
+position = Vector2(967, 202)
+rotation = 1.59868
+scale = Vector2(0.355874, 0.178935)
+texture = ExtResource("9_5ktfj")
+
+[node name="LogSprite3" type="Sprite2D" parent="Logs"]
+position = Vector2(286, 446)
+rotation = 0.621337
+scale = Vector2(-0.23, -0.208)
+skew = -0.023095
+texture = ExtResource("9_5ktfj")
+
+[node name="LogSprite4" type="Sprite2D" parent="Logs"]
+position = Vector2(206, 215)
+rotation = 1.59868
+scale = Vector2(0.355874, 0.178935)
+texture = ExtResource("9_5ktfj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Logs"]
+position = Vector2(286.158, 447.283)
+rotation = 0.621996
+shape = SubResource("RectangleShape2D_7re64")
+one_way_collision_margin = 128.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Logs"]
+position = Vector2(233, 87)
+rotation = -1.54948
+shape = SubResource("SegmentShape2D_hmtb6")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Logs"]
+position = Vector2(948, 189)
+rotation = 1.60257
+shape = SubResource("SegmentShape2D_hihjl")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Logs"]
+position = Vector2(187, 50)
+shape = SubResource("SegmentShape2D_6r8y0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Logs"]
+position = Vector2(866.714, 420.796)
+rotation = -0.621337
+shape = SubResource("RectangleShape2D_g6nhc")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Logs"]
+position = Vector2(26, -167)
+shape = SubResource("SegmentShape2D_5nbi7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(585, 576)
+shape = SubResource("WorldBoundaryShape2D_hwdo5")
+one_way_collision_margin = 128.0
+
+[node name="Ship" type="Sprite2D" parent="Area2D"]
+position = Vector2(576, 612)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship2" type="Sprite2D" parent="Area2D"]
+position = Vector2(576, 612)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship4" type="Sprite2D" parent="Area2D"]
+position = Vector2(704, 605)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship5" type="Sprite2D" parent="Area2D"]
+position = Vector2(862, 610)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship8" type="Sprite2D" parent="Area2D"]
+position = Vector2(828, 614)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship11" type="Sprite2D" parent="Area2D"]
+position = Vector2(715, 634)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship12" type="Sprite2D" parent="Area2D"]
+position = Vector2(672, 621)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship15" type="Sprite2D" parent="Area2D"]
+position = Vector2(275.75, 619.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship16" type="Sprite2D" parent="Area2D"]
+position = Vector2(275.75, 619.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship17" type="Sprite2D" parent="Area2D"]
+position = Vector2(403.75, 612.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship18" type="Sprite2D" parent="Area2D"]
+position = Vector2(561.75, 617.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship19" type="Sprite2D" parent="Area2D"]
+position = Vector2(332.75, 611.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship20" type="Sprite2D" parent="Area2D"]
+position = Vector2(570.75, 642.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship21" type="Sprite2D" parent="Area2D"]
+position = Vector2(527.75, 621.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship22" type="Sprite2D" parent="Area2D"]
+position = Vector2(490.75, 643.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship23" type="Sprite2D" parent="Area2D"]
+position = Vector2(451.75, 626.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship24" type="Sprite2D" parent="Area2D"]
+position = Vector2(414.75, 641.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship25" type="Sprite2D" parent="Area2D"]
+position = Vector2(371.75, 628.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship26" type="Sprite2D" parent="Area2D"]
+position = Vector2(317.75, 636.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship27" type="Sprite2D" parent="Area2D"]
+position = Vector2(0.750153, 625.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship28" type="Sprite2D" parent="Area2D"]
+position = Vector2(0.750153, 625.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship29" type="Sprite2D" parent="Area2D"]
+position = Vector2(0.750153, 625.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship30" type="Sprite2D" parent="Area2D"]
+position = Vector2(128.75, 618.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship31" type="Sprite2D" parent="Area2D"]
+position = Vector2(286.75, 623.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship32" type="Sprite2D" parent="Area2D"]
+position = Vector2(57.7502, 617.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship34" type="Sprite2D" parent="Area2D"]
+position = Vector2(252.75, 627.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship35" type="Sprite2D" parent="Area2D"]
+position = Vector2(215.75, 649.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship36" type="Sprite2D" parent="Area2D"]
+position = Vector2(176.75, 632.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship39" type="Sprite2D" parent="Area2D"]
+position = Vector2(42.7502, 642.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship41" type="Sprite2D" parent="Area2D"]
+position = Vector2(855.75, 626.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship43" type="Sprite2D" parent="Area2D"]
+position = Vector2(983.75, 619.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship44" type="Sprite2D" parent="Area2D"]
+position = Vector2(1141.75, 624.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship45" type="Sprite2D" parent="Area2D"]
+position = Vector2(912.75, 618.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship46" type="Sprite2D" parent="Area2D"]
+position = Vector2(1150.75, 649.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship47" type="Sprite2D" parent="Area2D"]
+position = Vector2(1107.75, 628.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship3" type="Sprite2D" parent="Area2D"]
+position = Vector2(576, 612)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship6" type="Sprite2D" parent="Area2D"]
+position = Vector2(633, 604)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship7" type="Sprite2D" parent="Area2D"]
+position = Vector2(871, 635)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship9" type="Sprite2D" parent="Area2D"]
+position = Vector2(791, 636)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship10" type="Sprite2D" parent="Area2D"]
+position = Vector2(752, 619)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship13" type="Sprite2D" parent="Area2D"]
+position = Vector2(618, 629)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship14" type="Sprite2D" parent="Area2D"]
+position = Vector2(275.75, 619.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship33" type="Sprite2D" parent="Area2D"]
+position = Vector2(295.75, 648.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship37" type="Sprite2D" parent="Area2D"]
+position = Vector2(139.75, 647.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship38" type="Sprite2D" parent="Area2D"]
+position = Vector2(96.7502, 634.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship40" type="Sprite2D" parent="Area2D"]
+position = Vector2(855.75, 626.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship42" type="Sprite2D" parent="Area2D"]
+position = Vector2(855.75, 626.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship51" type="Sprite2D" parent="Area2D"]
+position = Vector2(951.75, 635.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship49" type="Sprite2D" parent="Area2D"]
+position = Vector2(1031.75, 633.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship48" type="Sprite2D" parent="Area2D"]
+position = Vector2(1070.75, 650.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship50" type="Sprite2D" parent="Area2D"]
+position = Vector2(994.75, 648.089)
+scale = Vector2(-0.128, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="Ship52" type="Sprite2D" parent="Area2D"]
+position = Vector2(897.75, 643.089)
+scale = Vector2(0.128402, 0.116188)
+texture = ExtResource("6_11a6p")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(571, 84)
+shape = SubResource("WorldBoundaryShape2D_0bb64")
+one_way_collision = true
+one_way_collision_margin = 128.0
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="Treasure" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(708, 171)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure2" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(440, 93)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure8" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(440, 93)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure9" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(762, 200)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure10" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(475, 135)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure11" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(846, 192)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure12" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(744, 263)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure13" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(337, 201)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure14" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(299, 136)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure15" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(256, 17)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure16" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(925, 19)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure17" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(957, 37)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure3" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(451, 232)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure4" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(852, 276)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure5" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(294, 283)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure6" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(224, 42)
+scale = Vector2(0.05, 0.05)
+
+[node name="Treasure7" parent="Points" instance=ExtResource("10_b7dcs")]
+position = Vector2(754, 155)
+scale = Vector2(0.05, 0.05)
+
+[node name="Pirate" parent="Points" instance=ExtResource("11_rfaa5")]
+position = Vector2(421, 156)
+scale = Vector2(0.05, 0.05)
+
+[node name="Pirate2" parent="Points" instance=ExtResource("11_rfaa5")]
+position = Vector2(786, 314)
+scale = Vector2(0.05, 0.05)
+
+[node name="Pirate3" parent="Points" instance=ExtResource("11_rfaa5")]
+position = Vector2(795, 223)
+scale = Vector2(0.05, 0.05)
+
+[node name="Pirate4" parent="Points" instance=ExtResource("11_rfaa5")]
+position = Vector2(708, 205)
+scale = Vector2(0.05, 0.05)
+
+[node name="Pirate5" parent="Points" instance=ExtResource("11_rfaa5")]
+position = Vector2(563, 195)
+scale = Vector2(0.05, 0.05)
+
+[node name="Pirate6" parent="Points" instance=ExtResource("11_rfaa5")]
+position = Vector2(688, 122)
+scale = Vector2(0.05, 0.05)
+
+[node name="Pirate7" parent="Points" instance=ExtResource("11_rfaa5")]
+position = Vector2(375, 272)
+scale = Vector2(0.05, 0.05)
+
+[node name="Pirate8" parent="Points" instance=ExtResource("11_rfaa5")]
+position = Vector2(492, 174)
+scale = Vector2(0.05, 0.05)
+
+[connection signal="timeout" from="Cannon/Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2tse534ilkm"]
+
+[ext_resource type="Script" path="res://scripts/defeat.gd" id="1_0kqjb"]
+[ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="2_d1um0"]
+[ext_resource type="FontFile" uid="uid://ccxcgubjyyj7l" path="res://fonts/SairaStencilOne-Regular.ttf" id="3_covou"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jsg1h"]
+line_spacing = -15.0
+font = ExtResource("3_covou")
+font_size = 148
+font_color = Color(0.933333, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8hfqc"]
+line_spacing = -15.0
+font = ExtResource("3_covou")
+font_size = 72
+font_color = Color(0.209, 0.548839, 0.623197, 1)
+
+[node name="Defeat" type="Node2D"]
+script = ExtResource("1_0kqjb")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(578.5, 325)
+scale = Vector2(1.09352, 0.933333)
+texture = ExtResource("2_d1um0")
+
+[node name="Subtitle" type="Label" parent="."]
+offset_left = 2.0
+offset_top = 83.0
+offset_right = 1151.0
+offset_bottom = 316.0
+text = "You lost"
+label_settings = SubResource("LabelSettings_jsg1h")
+horizontal_alignment = 1
+
+[node name="Points" type="Label" parent="."]
+offset_left = 1.0
+offset_top = 249.0
+offset_right = 1150.0
+offset_bottom = 482.0
+text = "0 points collected"
+label_settings = SubResource("LabelSettings_8hfqc")
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="."]
+offset_left = 314.0
+offset_top = 394.0
+offset_right = 855.0
+offset_bottom = 498.0
+theme_override_fonts/font = ExtResource("3_covou")
+theme_override_font_sizes/font_size = 60
+text = "Restart Game"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]

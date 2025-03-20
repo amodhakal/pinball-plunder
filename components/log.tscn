@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwh15riy2je65"]
+
+[ext_resource type="Texture2D" uid="uid://dou8vkm6u1mno" path="res://assets/log.png" id="1_s715c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7u1bf"]
+size = Vector2(99, 23)
+
+[node name="Log" type="Node"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -1.52588e-05)
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(758.5, 212.5)
+shape = SubResource("RectangleShape2D_7u1bf")
+
+[node name="LogSprite" type="Sprite2D" parent="."]
+position = Vector2(758, 212)
+scale = Vector2(0.112723, 0.0971225)
+texture = ExtResource("1_s715c")
