@@ -7,6 +7,10 @@ func getPoints():
 	
 func addCollisionPoints():
 	points += 10
+	
+func removePiratePoints():
+	points -= 5
 
-func handleDefeat():
-	points -= 100
+func resetPoints():
+	points = 0
+	

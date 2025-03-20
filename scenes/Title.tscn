@@ -12,7 +12,7 @@ font_color = Color(0.0745098, 0.313726, 0.439216, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_bybcu"]
 line_spacing = -15.0
 font = ExtResource("2_axx4e")
-font_size = 36
+font_size = 24
 font_color = Color(0.176154, 0.550194, 0.750748, 1)
 
 [node name="Title" type="Node2D"]
@@ -38,7 +38,9 @@ offset_left = 49.0
 offset_top = 150.0
 offset_right = 1087.0
 offset_bottom = 375.0
-text = "Your prowess in hunting treasure has reached far throughout the seas. One such person who heard of you is Alex Jones. Once hearing about your exploits, he takes his Skull & Jones to kill you and steal your loot. When you meet, he fires a cannon at your ship. PROTECT YOUR SHIP!"
+text = "Your prowess in hunting treasure has reached far throughout the seas. One such person who heard of you is Alex Jones. Once hearing about your exploits, he takes his Skull & Jones to kill you and steal your loot.  You hear about Alex Jones' visit. Qucikly, you take the wood of the giants and the door of the dwarves to create a shield for your fleet.
+
+When you meet, he fires a cannon at your ship. PROTECT YOUR SHIPS! Use you doors to redirect the bullet, using W/A of Left/Right Arrow. If it hits any of your ships below, you die. If it hits treasure, you get points. If it hits pirates, you lose points."
 label_settings = SubResource("LabelSettings_bybcu")
 autowrap_mode = 2
 
