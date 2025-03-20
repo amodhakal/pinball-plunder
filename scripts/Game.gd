@@ -4,7 +4,11 @@ extends Node
 @onready var left_flipper = $LeftFlipper
 @onready var right_flipper = $RightFlipper
 @onready var cannon = $Cannon
+@onready var PointsLabel = $Points2
 var defeatLvl = "res://scenes/Defeat.tscn"
+
+func _process(delta: float) -> void:
+	PointsLabel.text = "Score: " + str(PointManager.getPoints())
 
 func _input(event):
 	if event.is_action_pressed("flip_left"):
