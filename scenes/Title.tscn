@@ -40,7 +40,7 @@ offset_right = 1087.0
 offset_bottom = 375.0
 text = "Your prowess in hunting treasure has reached far throughout the seas. One such person who heard of you is Alex Jones. Once hearing about your exploits, he takes his Skull & Jones to kill you and steal your loot.  You hear about Alex Jones' visit. Qucikly, you take the wood of the giants and the door of the dwarves to create a shield for your fleet.
 
-When you meet, he fires a cannon at your ship. PROTECT YOUR SHIPS! Use you doors to redirect the bullet, using W/A or Left/Right Arrow. If it hits any of your ships below, you die. If it hits treasure, you get points. If it hits pirates, you lose points."
+When you meet, he fires a cannon at your ship. PROTECT YOUR SHIPS! Use you doors to redirect the bullet, using A/D or Left/Right Arrow. If it hits any of your ships below, you die. If it hits treasure, you get points. If it hits pirates, you lose points."
 label_settings = SubResource("LabelSettings_bybcu")
 autowrap_mode = 2
 
