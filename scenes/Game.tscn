@@ -388,6 +388,7 @@ one_shot = true
 autostart = true
 
 [node name="Explosion" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(592, 610)
 scale = Vector2(0.137546, 0.137546)
 texture = ExtResource("13_2nya2")

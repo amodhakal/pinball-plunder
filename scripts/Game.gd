@@ -38,15 +38,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		await get_tree().create_timer(2.0).timeout 
 		get_tree().change_scene_to_file(defeatLvl)
 		return
-	else:
-		explosion.visible = false
 	
 	if body == ball or body == hardBall && Globals.gamemode == "hard":
 		explosion.visible = true
 		await get_tree().create_timer(2.0).timeout 
 		get_tree().change_scene_to_file(defeatLvl)
-	else:
-		explosion.visible = false
 	
 
 
