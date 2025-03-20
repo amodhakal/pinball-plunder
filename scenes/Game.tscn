@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://scripts/left_flipper.gd" id="8_ifxht"]
 [ext_resource type="Texture2D" uid="uid://dou8vkm6u1mno" path="res://assets/log.png" id="9_5ktfj"]
 [ext_resource type="Texture2D" uid="uid://dxqxgxemh0xqh" path="res://assets/truecannon.png" id="9_y32yo"]
-[ext_resource type="PackedScene" path="res://components/treasure.tscn" id="10_b7dcs"]
-[ext_resource type="PackedScene" path="res://components/pirate.tscn" id="11_rfaa5"]
+[ext_resource type="PackedScene" uid="uid://v4rfn8tctwr6" path="res://components/treasure.tscn" id="10_b7dcs"]
+[ext_resource type="PackedScene" uid="uid://s405trtatv01" path="res://components/pirate.tscn" id="11_rfaa5"]
 [ext_resource type="FontFile" uid="uid://ccxcgubjyyj7l" path="res://fonts/SairaStencilOne-Regular.ttf" id="12_b8suw"]
 [ext_resource type="Texture2D" uid="uid://c5fodbuers1ng" path="res://assets/explosion.png" id="13_2nya2"]
 

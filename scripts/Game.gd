@@ -34,14 +34,19 @@ func _input(event):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if Globals.gamemode == "normal" && body == ball:
+		AudioManager.play_defeat_music()
 		explosion.visible = true
-		await get_tree().create_timer(2.0).timeout 
+		await get_tree().create_timer(1.5).timeout 
 		get_tree().change_scene_to_file(defeatLvl)
 		return
 	
 	if body == ball or body == hardBall && Globals.gamemode == "hard":
+		if explosion.visible == true:
+			return
+			
+		AudioManager.play_defeat_music()
 		explosion.visible = true
-		await get_tree().create_timer(2.0).timeout 
+		await get_tree().create_timer(1.5).timeout 
 		get_tree().change_scene_to_file(defeatLvl)
 	
 

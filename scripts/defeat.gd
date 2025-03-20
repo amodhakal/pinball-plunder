@@ -7,7 +7,6 @@ var gameLvl = "res://scenes/Game.tscn"
 var titleLvl = "res://scenes/Title.tscn"
 
 func _ready() -> void:
-	AudioManager.play_defeat_music()
 	PointsLabel.text = str(PointManager.getPoints()) + " points collected"
 
 func _on_play_pressed() -> void:
