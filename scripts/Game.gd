@@ -8,6 +8,9 @@ extends Node
 @onready var hardCannon = $HardCannon
 @onready var PointsLabel = $Points2
 @onready var timer = $Timer
+@onready var ship = $Area2D/Ship
+
+var explosionTexture = preload("res://assets/explosion.png")
 var defeatLvl = "res://scenes/Defeat.tscn"
 
 func _process(delta: float) -> void:
@@ -31,6 +34,7 @@ func _input(event):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if Globals.gamemode == "normal" && body == ball:
+		ship.texture = explosionTexture
 		get_tree().change_scene_to_file(defeatLvl)
 		return
 	
