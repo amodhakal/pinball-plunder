@@ -1,9 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://clo5ro7xhnnkh"]
+[gd_scene load_steps=25 format=3 uid="uid://clo5ro7xhnnkh"]
 
 [ext_resource type="Texture2D" uid="uid://dcqt8bqykipxn" path="res://assets/background.png" id="1_s0mc2"]
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_shevl"]
 [ext_resource type="Texture2D" uid="uid://dvciojc1o2mq2" path="res://assets/flipper.png" id="2_vbjh6"]
-[ext_resource type="Script" path="res://scenes/hard_ball_physics.gd" id="4_7v3x8"]
 [ext_resource type="Texture2D" uid="uid://bs67gss42v31x" path="res://assets/ball.png" id="5_4nvdx"]
 [ext_resource type="Script" path="res://scripts/right_flipper.gd" id="5_ds74c"]
 [ext_resource type="Texture2D" uid="uid://dchbodow31k6x" path="res://assets/ship.png" id="6_11a6p"]
@@ -117,8 +116,6 @@ linear_damp_mode = 1
 linear_damp = 2.0
 angular_damp_mode = 1
 angular_damp = 0.5
-script = ExtResource("4_7v3x8")
-speed = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HardBallPhysics"]
 position = Vector2(397, 32)
