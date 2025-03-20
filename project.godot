@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 [autoload]
 
 PointManager="*res://scripts/PointManager.gd"
+AudioManager="*res://scripts/AudioManager.gd"
 
 [display]
 
