@@ -7,7 +7,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_jsg1h"]
 line_spacing = -15.0
 font = ExtResource("3_covou")
-font_size = 148
+font_size = 100
 font_color = Color(0.933333, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8hfqc"]
@@ -29,7 +29,7 @@ offset_left = 2.0
 offset_top = 83.0
 offset_right = 1151.0
 offset_bottom = 316.0
-text = "You died"
+text = "Shipwreck!"
 label_settings = SubResource("LabelSettings_jsg1h")
 horizontal_alignment = 1
 
